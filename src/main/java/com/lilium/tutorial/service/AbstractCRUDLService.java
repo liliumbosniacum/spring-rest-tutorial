@@ -6,6 +6,7 @@ import com.lilium.tutorial.converter.AbstractDTOConverter;
 import com.lilium.tutorial.dto.BaseDTO;
 import com.lilium.tutorial.entity.DistributedEntity;
 import com.lilium.tutorial.repository.DistributedRepository;
+import com.lilium.tutorial.repository.DistributedRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.GenericTypeResolver;
@@ -79,11 +80,14 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
     public List<DTO> list() {
         final List<ENTITY> entities = Lists.newArrayList(repository.findAll());
 
-        if (CollectionUtils.isEmpty(entities)) {
-           return Collections.emptyList();
-        }
+        return getDtos(entities);
+    }
 
-        return converter.convertList(entities);
+    @Override
+    public List<DTO> modifiedSince(LocalDateTime time) {
+        final List<ENTITY> entities = repository.findAllModifiedSince(time);
+
+        return getDtos(entities);
     }
 
     @Override
@@ -121,6 +125,14 @@ public abstract class AbstractCRUDLService<ENTITY extends DistributedEntity, DTO
 
     private ENTITY findEntityById(Integer id) {
         return repository.findById(id).orElse(null);
+    }
+
+    private List<DTO> getDtos(List<ENTITY> entities) {
+        if (CollectionUtils.isEmpty(entities)) {
+            return Collections.emptyList();
+        }
+
+        return converter.convertList(entities);
     }
     // endregion
 }

@@ -3,6 +3,7 @@ package com.lilium.tutorial.api;
 import com.lilium.tutorial.dto.BaseDTO;
 import com.lilium.tutorial.entity.DistributedEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,6 +36,14 @@ public interface AbstractCRUDLApi<ENTITY extends DistributedEntity, DTO extends 
      * @return Returns a list of DTOs.
      */
     List<DTO> list();
+
+    /**
+     * Finds all entities modified since forwarded timestamp.
+     *
+     * @param time Timestamp.
+     * @return Returns a list of DTOs.
+     */
+    List<DTO> modifiedSince(LocalDateTime time);
 
     /**
      * Deletes the entity by forwarded ID.

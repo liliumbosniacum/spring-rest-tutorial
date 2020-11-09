@@ -1,7 +1,13 @@
 package com.lilium.tutorial.repository;
 
-import com.lilium.tutorial.entity.DistributedEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-public interface DistributedRepository<ENTITY extends DistributedEntity> extends CrudRepository<ENTITY, Integer> {
+import java.time.LocalDateTime;
+import java.util.List;
+
+@NoRepositoryBean
+public interface DistributedRepository<ENTITY> extends JpaRepository<ENTITY, Integer> {
+
+    List<ENTITY> findAllModifiedSince(LocalDateTime time);
 }
