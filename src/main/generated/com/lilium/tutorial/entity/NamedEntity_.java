@@ -5,12 +5,12 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
-@StaticMetamodel(User.class)
-public abstract class User_ extends com.lilium.tutorial.entity.NamedEntity_ {
+@StaticMetamodel(NamedEntity.class)
+public abstract class NamedEntity_ extends com.lilium.tutorial.entity.DistributedEntity_ {
 
-	public static volatile SingularAttribute<User, String> username;
+	public static volatile SingularAttribute<NamedEntity, String> name;
 
-	public static final String USERNAME = "username";
+	public static final String NAME = "name";
 
 }
 

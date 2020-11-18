@@ -4,9 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class User extends DistributedEntity {
+public class User extends NamedEntity {
     private String username;
-    private String name;
 
     @Column(nullable = false)
     public String getUsername() {
@@ -15,13 +14,5 @@ public class User extends DistributedEntity {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
